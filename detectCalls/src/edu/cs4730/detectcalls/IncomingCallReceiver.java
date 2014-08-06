@@ -1,6 +1,5 @@
 package edu.cs4730.detectcalls;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +7,12 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
+
+/*
+ * This will detect incoming calls  
+ * Note you can change the phone number, so the user (ie phone app) see the wrong phone number
+ * I didn't do that here, but you can.
+ */
 
 public class IncomingCallReceiver extends BroadcastReceiver {
 
