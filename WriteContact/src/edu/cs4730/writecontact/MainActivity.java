@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 import android.provider.ContactsContract;
 
+/*
+ * This just adds a contact to the list.  There is no real output, just the code
+ * here.
+ */
 public class MainActivity extends Activity {
 
 	@Override
