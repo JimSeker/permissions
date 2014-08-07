@@ -6,12 +6,6 @@
     android:orientation="vertical"
     tools:context="edu.cs4730.wifitoggle.MainFragment" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wifi is " />
-
         <Switch
         android:id="@+id/wifi_switch"
         android:layout_width="wrap_content"
@@ -25,4 +19,4 @@
         android:textOff="OFF"
         android:textOn="ON" />
         
-</LinearLayout>
+</LinearLayout> 

@@ -12,7 +12,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple demo of turning the wifi on and off.
+ * See the permissions in the androidManifest.xml as well.
  * 
  */
 public class MainFragment extends Fragment {
