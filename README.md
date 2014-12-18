@@ -1,5 +1,6 @@
-Permission Examples
+Android Permission Examples
 ===========
+eclipse/ is the examples for use in eclipse. This is no longer updated. The rest of the examples are in Android studio format.
 
 ReadContact: a demo of how to read the contacts on the device.
 
