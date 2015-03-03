@@ -30,8 +30,8 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
                 String info = "Detect Calls sample application\nOutgoing number: " + phonenumber;
                
                 Toast.makeText(context, info, Toast.LENGTH_LONG).show();
-             //   if (phonenumber == "5556") {
-                  setResultData(null);  //should stop phone call!
-             //   }
+                if (phonenumber.compareTo("5556") == 0) {
+                  setResultData(null);  //should stop phone call to 5556 which would be an emulator.
+                }
         }
 }

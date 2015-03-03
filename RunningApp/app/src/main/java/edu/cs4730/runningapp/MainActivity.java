@@ -1,13 +1,13 @@
 package edu.cs4730.runningapp;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 
 /*
  * See the MainFragment for the code on how to see the running apps.
  */
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

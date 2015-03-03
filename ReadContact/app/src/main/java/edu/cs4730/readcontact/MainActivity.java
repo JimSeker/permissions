@@ -1,12 +1,12 @@
 package edu.cs4730.readcontact;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 
 /*
  * See the MainFragment on how to read all the contacts on the phone.
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
 
 	@Override

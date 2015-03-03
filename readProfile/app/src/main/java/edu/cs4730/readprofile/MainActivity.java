@@ -1,7 +1,7 @@
 package edu.cs4730.readprofile;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 /*
  * See the MainFragment for how to read the profile.
@@ -9,7 +9,7 @@ import android.os.Bundle;
  * Note, this app only works on api 14+  No support libs were used either.
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
