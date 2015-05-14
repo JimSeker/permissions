@@ -1,12 +1,12 @@
 package edu.cs4730.readcontact;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 /*
  * See the MainFragment on how to read all the contacts on the phone.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
 
 	@Override

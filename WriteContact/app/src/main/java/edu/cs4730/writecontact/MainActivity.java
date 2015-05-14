@@ -1,9 +1,9 @@
 package edu.cs4730.writecontact;
 
 import java.util.ArrayList;
-import android.app.Activity;
 import android.content.ContentProviderOperation;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import android.provider.ContactsContract;
 
@@ -11,7 +11,7 @@ import android.provider.ContactsContract;
  * This just adds a contact to the list.  There is no real output, just the code
  * here.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

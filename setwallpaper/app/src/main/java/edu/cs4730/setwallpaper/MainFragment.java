@@ -37,6 +37,7 @@ public class MainFragment extends Fragment {
 			public void onClick(View view) {
 				WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getActivity().getApplicationContext());
 				try {
+					//studio claims there is an error, but compiles and the project runs just fine.  stupid studio.
 					myWallpaperManager.setResource(R.drawable.ifixedit);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

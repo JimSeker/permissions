@@ -2,11 +2,11 @@ package edu.cs4730.wifitoggle;
 
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends ActionBarActivity {
+//nothing to see here, check MainFragment for code.
+
+public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

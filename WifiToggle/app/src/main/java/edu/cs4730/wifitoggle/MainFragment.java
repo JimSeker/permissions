@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
 		WifiManager wifiManager = (WifiManager) getActivity()
 				.getSystemService(Context.WIFI_SERVICE);
 		if (wifiManager != null && wifiManager.isWifiEnabled()) {
-			toggle.setChecked(true);
+			toggle.setChecked(true);  //api 14+ method, but otherwise the rest of the code will work back to at least api 10.
 		}
 		
 		toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
