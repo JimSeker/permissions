@@ -14,5 +14,7 @@ readProfile: a demo of how to read the profile information on the device (api 14
 
 setwallpaper: show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
+ScopedDirAccess: test code for the new API N scoped file access permissions calls.  
+
 These are example code for University of Wyoming, Cosc 4730 Mobile Programming course.
 All examples are for Android.
