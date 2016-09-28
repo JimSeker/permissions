@@ -23,7 +23,9 @@ import java.util.List;
 *
 *
 *  To test, you can revoke the permission by going to app -> scopedDirAccess -> storage ->  Clear Access button.
-*
+*  This is based off of https://plus.google.com/u/0/+AndroidDevelopers/posts/byKvsJ5W4Lj?cfem=1
+*    As note, see comments, there is a bug in 7.0, where if the user denies and never ask again is check.
+*    It's permanent, even surviving a deinstall of the app and reinstall.  Should be fixed 7.1
  */
 
 
