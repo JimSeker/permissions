@@ -21,12 +21,13 @@ import android.widget.TextView;
 
 /**
  * this demos how to get all the running processes on the phone.
- *  
+ *
+ *  Note that running task is decrapted in API 21
  * 
  */
 public class MainFragment extends Fragment {
 
-	TextView output;
+	TextView logger;
 	
 	public MainFragment() {
 		// Required empty public constructor
@@ -43,7 +44,7 @@ public class MainFragment extends Fragment {
 				getlist();
 			}
         });
-		output = (TextView) myView.findViewById(R.id.ouput);
+		logger = (TextView) myView.findViewById(R.id.logger);
 		return myView;
 	}
 
@@ -59,36 +60,36 @@ public class MainFragment extends Fragment {
 		List<RecentTaskInfo> recentTasks = activityManager.getRecentTasks(Integer.MAX_VALUE, ActivityManager.RECENT_WITH_EXCLUDED);
 
 
-		output.setText("Running Tasks list:");
+		logger.setText("Running Tasks list:");
 		for (RunningTaskInfo task : runTasks) {
-			output.append("\n"+ task.baseActivity.getPackageName()+"("+ task.baseActivity.getShortClassName()+")");
+			logger.append("\n"+ task.baseActivity.getPackageName()+"("+ task.baseActivity.getShortClassName()+")");
 		}
 		
-		output.append("\n\nRunning Services list:");
+		logger.append("\n\nRunning Services list:");
 		for (RunningServiceInfo task : runServices) {
-			output.append("\n"+ task.service.getPackageName());
+			logger.append("\n"+ task.service.getPackageName());
 		}
 		
-		output.append("\n\nAppProcess list:");
+		logger.append("\n\nAppProcess list:");
 		for (RunningAppProcessInfo task : runApp) {
-			//output.append("\n"+ task.importanceReasonComponent.getPackageName());
-			output.append("\n"+ task.processName);
+			//logger.append("\n"+ task.importanceReasonComponent.getPackageName());
+			logger.append("\n"+ task.processName);
 		}
 		
-		output.append("\n\nRecent Task list:");
+		logger.append("\n\nRecent Task list:");
 		for (RecentTaskInfo task : recentTasks) {
-			//output.append("\n"+ task.origActivity.getPackageName());
-			output.append("\n"+ task.baseIntent.getComponent().getPackageName());
+			//logger.append("\n"+ task.origActivity.getPackageName());
+			logger.append("\n"+ task.baseIntent.getComponent().getPackageName());
 		}
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  //not available before API 21.
             List<ActivityManager.AppTask> appTasks = activityManager.getAppTasks();
-            output.append("\n\nApp Task list:");
+            logger.append("\n\nApp Task list:");
             for (ActivityManager.AppTask task : appTasks) {
                 //everything shows a null... not doing something correct here.
-                //output.append("\n" + task.getTaskInfo().taskDescription.getLabel());  // comes out null...
-                //output.append("\n" + task.getTaskInfo().description);
+                //logger.append("\n" + task.getTaskInfo().taskDescription.getLabel());  // comes out null...
+                //logger.append("\n" + task.getTaskInfo().description);
                 //at least this one, gives me information, just about the intent that launched this activity.
-                output.append("\n" + task.getTaskInfo().baseIntent.toUri(0));
+                logger.append("\n" + task.getTaskInfo().baseIntent.toUri(0));
             }
         }
 
