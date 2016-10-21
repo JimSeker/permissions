@@ -16,6 +16,6 @@
         android:id="@+id/output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adding new Contact, Fred flintstone\n" />
+        android:text="Read contacts\n" />
 
 </LinearLayout>
