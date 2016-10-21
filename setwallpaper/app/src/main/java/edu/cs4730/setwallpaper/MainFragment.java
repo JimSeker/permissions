@@ -13,39 +13,39 @@ import android.widget.ImageView;
 
 /**
  * This is an example of how to setup the wall paper on the device.
- * 
  */
 public class MainFragment extends Fragment {
 
-	public MainFragment() {
-		// Required empty public constructor
-	}
+    public MainFragment() {
+        // Required empty public constructor
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		View myView = inflater.inflate(R.layout.fragment_main, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View myView = inflater.inflate(R.layout.fragment_main, container, false);
 
-		Button buttonSetWallpaper = (Button) myView.findViewById(R.id.set);
-		ImageView imagePreview = (ImageView) myView.findViewById(R.id.preview);
+        Button buttonSetWallpaper = (Button) myView.findViewById(R.id.set);
+        ImageView imagePreview = (ImageView) myView.findViewById(R.id.preview);
 
-		imagePreview.setImageResource(R.drawable.ifixedit);
+        imagePreview.setImageResource(R.drawable.ifixedit);
 
-		buttonSetWallpaper.setOnClickListener(new Button.OnClickListener(){
-			@Override
-			public void onClick(View view) {
-				WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getActivity().getApplicationContext());
-				try {
-					//studio claims there is an error, but compiles and the project runs just fine.  stupid studio.
-					myWallpaperManager.setResource(R.drawable.ifixedit);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+        buttonSetWallpaper.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getActivity().getApplicationContext());
+                try {
+                    //studio claims there is an error, but compiles and the project runs just fine.  stupid studio.
+                    myWallpaperManager.setResource(R.drawable.ifixedit);
+                } catch (IOException e) {
 
-			}});
-		return myView;
-	}
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        return myView;
+    }
 
 }

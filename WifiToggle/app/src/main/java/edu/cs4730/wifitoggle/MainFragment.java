@@ -14,7 +14,8 @@ import android.widget.Toast;
 /**
  * A simple demo of turning the wifi on and off.
  * See the permissions in the androidManifest.xml as well.
- * 
+ *
+ * not a dangerous permission, so no extra check is needed.
  */
 public class MainFragment extends Fragment {
 

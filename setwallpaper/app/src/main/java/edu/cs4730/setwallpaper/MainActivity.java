@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 //nothing to see here, check the MainFragment.
+//No wall paper permission is not "dangerous", so no extra check is needed.
 
 public class MainActivity extends AppCompatActivity {
 
