@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)) {
             //I'm on not explaining why, just asking for permission.
             Log.v(TAG, "asking for permissions");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.PROCESS_OUTGOING_CALLS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECORD_AUDIO},
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.PROCESS_OUTGOING_CALLS, Manifest.permission.READ_PHONE_STATE},
                     MainActivity.REQUEST_PERM_ACCESS);
 
         } else {
