@@ -1,24 +1,90 @@
 package edu.cs4730.writecontact;
 
 import java.util.ArrayList;
+
+import android.Manifest;
 import android.content.ContentProviderOperation;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.provider.ContactsContract;
+
 
 /*
  * This just adds a contact to the list.  There is no real output, just the code
  * here.
  */
 public class MainActivity extends AppCompatActivity {
+    String TAG = "MainActivity";
+    public static final int REQUEST_PERM_ACCESS = 1;
+    TextView logger;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        logger = (TextView) findViewById(R.id.logger);
+        //add check premission checking, for onResume code.
+        //add return check
+    }
 
-	
+    //ask for permissions when we start.
+    @Override
+    public void onResume() {
+        super.onResume();
+        CheckPerm();
+    }
+
+    public void CheckPerm() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            //I'm on not explaining why, just asking for permission.
+            Log.v(TAG, "asking for permissions");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
+                    MainActivity.REQUEST_PERM_ACCESS);
+
+        } else {
+            logger.append("\nContact Write Access: Granted\n");
+            addContactDemo();
+        }
+
+    }
+
+
+    //handle the response.
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERM_ACCESS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    logger.append("Contact Write Access: Granted");
+                    addContactDemo();
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                   logger.append("Contact Write Access: Not Granted");
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+
+
+    public void addContactDemo() {
 		String DisplayName = "Fred Flintstone";
 		 String MobileNumber = "123456";
 		 String HomeNumber = "1111";
