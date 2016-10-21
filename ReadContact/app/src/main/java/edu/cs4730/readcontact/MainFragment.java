@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * This is an example to read the contacts lists on the phone.
  * <p>
@@ -25,7 +23,7 @@ import static android.content.ContentValues.TAG;
  */
 public class MainFragment extends Fragment {
     public TextView logger;
-    public String Tag = "MainFragment";
+    public String TAG = "MainFragment";
 
     public MainFragment() {
         // Required empty public constructor
