@@ -32,7 +32,7 @@ public class MainFragment extends Fragment {
 
 		Switch toggle = (Switch) myView.findViewById(R.id.wifi_switch);
 		//set the switch correctly for first instance.
-		WifiManager wifiManager = (WifiManager) getActivity()
+		WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);
 		if (wifiManager != null && wifiManager.isWifiEnabled()) {
 			toggle.setChecked(true);  //api 14+ method, but otherwise the rest of the code will work back to at least api 10.
@@ -54,7 +54,7 @@ public class MainFragment extends Fragment {
 
 	
 	public void toggleWiFi(boolean status) {
-		WifiManager wifiManager = (WifiManager) getActivity()
+		WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);
 		if (wifiManager != null && status == true && !wifiManager.isWifiEnabled()) {
 			wifiManager.setWifiEnabled(true);
