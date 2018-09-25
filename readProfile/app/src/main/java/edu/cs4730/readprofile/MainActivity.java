@@ -2,7 +2,7 @@ package edu.cs4730.readprofile;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /*
  * See the MainFragment for how to read the profile.

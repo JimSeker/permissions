@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="list picture directory. "
         android:id="@+id/button" />
-<android.support.v4.widget.NestedScrollView
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
@@ -23,5 +23,5 @@
         android:layout_height="wrap_content"
         android:text="Logger:\n"
         android:id="@+id/textView" />
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,7 +1,7 @@
 package edu.cs4730.setwallpaper;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 //nothing to see here, check the MainFragment.
 //No wall paper permission is not "dangerous", so no extra check is needed.

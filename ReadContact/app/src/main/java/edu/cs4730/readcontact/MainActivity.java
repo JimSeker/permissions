@@ -2,7 +2,7 @@ package edu.cs4730.readcontact;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /*
  * See the MainFragment on how to read all the contacts on the phone.
