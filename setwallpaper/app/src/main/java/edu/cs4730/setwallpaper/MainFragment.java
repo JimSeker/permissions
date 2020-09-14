@@ -29,7 +29,7 @@ public class MainFragment extends Fragment {
         Button buttonSetWallpaper = (Button) myView.findViewById(R.id.set);
         ImageView imagePreview = (ImageView) myView.findViewById(R.id.preview);
 
-        imagePreview.setImageResource(R.drawable.ifixedit);
+        imagePreview.setImageResource(R.raw.ifixedit);
 
         buttonSetWallpaper.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -37,7 +37,7 @@ public class MainFragment extends Fragment {
                 WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getActivity().getApplicationContext());
                 try {
                     //studio claims there is an error, but compiles and the project runs just fine.  stupid studio.
-                    myWallpaperManager.setResource(R.drawable.ifixedit);
+                    myWallpaperManager.setResource(R.raw.ifixedit);
                 } catch (IOException e) {
 
                     e.printStackTrace();

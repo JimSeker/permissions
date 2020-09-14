@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         String HomeNumber = "1111";
         String WorkNumber = "2222";
         String emailID = "email@nomail.com";
-        String company = "bad";
-        String jobTitle = "abcd";
+        String company = "Slate Rock company";
+        String jobTitle = "Foreman";
 
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
 

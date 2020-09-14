@@ -128,6 +128,7 @@ public class MainFragment extends Fragment {
 
             logger.append("\n" + output);
         }
+        cursor.close();
     }
 
 
