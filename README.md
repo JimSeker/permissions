@@ -4,15 +4,16 @@ eclipse/ is the examples for use in eclipse. This is no longer updated. The rest
 
 <b>ReadContact</b>: a demo of how to read the contacts on the device.
 
-<b>WriteContact</b>: a demo of how to write a contact to the device (and google)
-
-
+<b>WriteContact</b>: a demo of how to write a contact to the device (and Google)
 
 <b>readProfile</b>: a demo of how to read the profile information on the device (api 14+)
 
 <b>setwallpaper</b>: show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
 <b>ScopedDirAccess</b>: test code for the new API N scoped file access permissions calls.  
+
+<b>CallScreeningDemo</b>: A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  
+
 
 <b>legacy</b>  are projects that are no longer updated.<BR>
 <b>RunningApp</b>: show to how to get a list of all the running app's on the device.  This permission is depreciated in api 22.
