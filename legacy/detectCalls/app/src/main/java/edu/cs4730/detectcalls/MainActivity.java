@@ -8,11 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-/*
+/**
  * In here we request permissions.  Normally your app would have something more interesting
  * then an empty mainactivity.
  *
  * It's the receivers that you want to look at.
+ *
+ *
+ * This App is deprecated as of API 29.
+ *
  */
 
 public class MainActivity extends AppCompatActivity {

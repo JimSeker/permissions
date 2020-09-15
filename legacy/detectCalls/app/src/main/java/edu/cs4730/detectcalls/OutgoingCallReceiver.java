@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-/*
+/**
  * This is an outbound phone call detector. 
  * Note there is an example of how to stop hang up on out bound call.
  *   No, you can't hang up on incoming calls without rooting the phone.
+ *
+ *   deprecated... as of API 29.
+ *
  */
 
 public class OutgoingCallReceiver extends BroadcastReceiver {
