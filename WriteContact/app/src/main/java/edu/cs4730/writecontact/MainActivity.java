@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        logger = (TextView) findViewById(R.id.logger);
+        logger = findViewById(R.id.logger);
         //add check permission checking, for onResume code.
         //add return check
     }
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
+
         switch (requestCode) {
             case REQUEST_PERM_ACCESS: {
                 // If request is cancelled, the result arrays are empty.
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 

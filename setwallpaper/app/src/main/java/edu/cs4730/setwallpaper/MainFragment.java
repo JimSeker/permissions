@@ -26,8 +26,8 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button buttonSetWallpaper = (Button) myView.findViewById(R.id.set);
-        ImageView imagePreview = (ImageView) myView.findViewById(R.id.preview);
+        Button buttonSetWallpaper = myView.findViewById(R.id.set);
+        ImageView imagePreview = myView.findViewById(R.id.preview);
 
         imagePreview.setImageResource(R.raw.ifixedit);
 
