@@ -1,6 +1,11 @@
 package edu.cs4730.callscreeningdemo;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.Activity;
 import android.app.role.RoleManager;
@@ -12,13 +17,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_ID = 1;
     private static final String TAG = "MainActivity";
     public static final String PREFS_NAME = "CallScreen";
-
-    Switch noring, disallow, nonot, nolog, reject;
+    SwitchMaterial noring, disallow, nonot, nolog, reject;
     CallScreenData myCallScreenData = new CallScreenData();
+    ActivityResultLauncher<Intent> myActivityResultLauncher;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -29,6 +35,22 @@ public class MainActivity extends AppCompatActivity {
         nonot = findViewById(R.id.nonot);
         nolog = findViewById(R.id.nolog);
         reject = findViewById(R.id.reject);
+
+        myActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        //Intent data = result.getData();
+                        Log.d(TAG, "We are the call screening app");
+                    } else {
+                        // Your app is not the call screening app
+                        Log.wtf(TAG, "We are NOT the call screening app");
+                    }
+                }
+            });
+
 
         //set everything.
         loadTitlePref(getApplicationContext(), myCallScreenData);
@@ -100,24 +122,8 @@ public class MainActivity extends AppCompatActivity {
     public void requestRole() {
         RoleManager roleManager = (RoleManager) getSystemService(ROLE_SERVICE);
         Intent intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_CALL_SCREENING);
-        startActivityForResult(intent, REQUEST_ID);
+        myActivityResultLauncher.launch(intent);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == REQUEST_ID) {
-            if (resultCode == Activity.RESULT_OK) {
-                // Your app is now the call screening app
-                Log.d(TAG, "We are the call screening app");
-            } else {
-                // Your app is not the call screening app
-                Log.wtf(TAG, "We are NOT the call screening app");
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 
     // Write the prefix to the SharedPreferences object for this widget
     static void saveTitlePref(Context context, CallScreenData data) {
