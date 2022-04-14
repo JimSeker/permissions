@@ -1,57 +1,101 @@
 package edu.cs4730.readprofile;
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
-/*
- * See the MainFragment for how to read the profile.
- * 
- * Note, this app only works on api 14+, since there were no profiles before api 14.
+import java.util.Map;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+/**
+ * This reads a profile and displays all the information to the screen.
  */
 
 public class MainActivity extends AppCompatActivity {
-	public static final int REQUEST_PERM_ACCESS = 1;
-	MainFragment myMainFragment;
+    TextView logger;
+    String TAG = "MainActivity";
+    ActivityResultLauncher<String[]> rpl;
+    //private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_PROFILE", "android.permission.WRITE_PROFILE", "android.permission.READ_CONTACTS"};
+    //we only need to ask for read contacts permission.  The other are needed in the manifest.  this doesn't write the profile, so that is not needed.
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS"};
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-        myMainFragment = new MainFragment();
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, myMainFragment).commit();
-        }
-    }
-
-
-    //handle the response.
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_PERM_ACCESS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    myMainFragment.logger.setText("Contact Read Access: Granted");
-                    myMainFragment.getprofile();
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    myMainFragment.logger.setText("Contact Read Access: Not Granted");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        rpl = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+            new ActivityResultCallback<Map<String, Boolean>>() {
+                @Override
+                public void onActivityResult(Map<String, Boolean> isGranted) {
+                    boolean granted = true;
+                    for (Map.Entry<String, Boolean> x : isGranted.entrySet()) {
+                        logthis(x.getKey() + " is " + x.getValue());
+                        if (!x.getValue()) granted = false;
+                    }
+                    if (granted) getProfile();
                 }
-                return;
             }
+        );
 
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!allPermissionsGranted())
+                    rpl.launch(REQUIRED_PERMISSIONS);
+                else {
+                    logthis("all permissions granted.");
+                    getProfile();
+                }
+            }
+        });
+        logger = findViewById(R.id.logger);
+
     }
+
+    public void logthis(String msg) {
+        logger.append(msg + "\n");
+        Log.d(TAG, msg);
+    }
+
+    //ask for permissions when we start.
+    private boolean allPermissionsGranted() {
+        for (String permission : REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This will go through the profile and print everything we can see.
+     */
+    @SuppressLint("Range")
+    public void getProfile() {
+
+        Cursor c = getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+        if (c == null) return;
+        int count = c.getCount();
+
+        String[] columnNames = c.getColumnNames();
+
+        c.moveToFirst();  //make sure the cursor is at the beginning, because it could be at the end of the list already.
+        for (int i = 0; i < count; i++) {
+            for (String columnName : columnNames) {
+                logthis(columnName + " " + c.getString(c.getColumnIndex(columnName)));
+            }
+        }
+        c.close();
+    }
+
 }
