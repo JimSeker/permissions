@@ -1,27 +1,20 @@
 Android Permission Examples
 ===========
-eclipse/ is the examples for use in eclipse. This is no longer updated. The rest of the examples are in Android studio format.
+`eclipse/` is the examples for use in eclipse. This is no longer updated. The rest of the examples are in Android studio format.
 
-<b>ReadContact</b>: a demo of how to read the contacts on the device.
+`legacy/`  are projects that are no longer updated.<BR>
 
-<b>WriteContact</b>: a demo of how to write a contact to the device (and Google)
+`ReadContact` a demo of how to read the contacts on the device.
 
-<b>readProfile</b>: a demo of how to read the profile information on the device (api 14+)
+`WriteContact` a demo of how to write a contact to the device (and Google)
 
-<b>setwallpaper</b>: show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
+`readProfile` a demo of how to read the profile information on the device (api 14+)
 
+`setwallpaper` show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
+`CallScreeningDemo`: A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  the outbound call part still looks to be ignored.
 
-<b>CallScreeningDemo</b>: A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  
+---
 
-
-<b>legacy</b>  are projects that are no longer updated.<BR>
-  
-<b>RunningApp</b>: show to how to get a list of all the running app's on the device.  This permission is depreciated in api 22.
-  
-<b>detectCalls</b>: an fun demo of how to detect incoming calls and outgoing calls.  Also, how to end outgoing calls.  Depreciated as of api 29.
-  
-<b>ScopedDirAccess</b>: test code for the new API N scoped file access permissions calls.  It never worked very well and has been replaced by the new file system permissions.
-
-These are example code for University of Wyoming, Cosc 4730 Mobile Programming course.
+These are example code for University of Wyoming, Cosc 4730 Mobile Programming course and cosc 4735 Advance Mobile Programing course. 
 All examples are for Android.
