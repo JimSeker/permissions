@@ -1,16 +1,23 @@
 package edu.cs4730.writecontact;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import android.Manifest;
 import android.content.ContentProviderOperation;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.provider.ContactsContract;
@@ -21,79 +28,75 @@ import android.provider.ContactsContract;
  */
 public class MainActivity extends AppCompatActivity {
     String TAG = "MainActivity";
-    public static final int REQUEST_PERM_ACCESS = 1;
     TextView logger;
+    EditText name, mobileNumber, homeNumber, workNumber, emailAddr, companyName, jobTitle2;
+    ActivityResultLauncher<String[]> rpl;
+    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS", "android.permission.WRITE_CONTACTS"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //this allows us to check with multiple permissions, but in this case (currently) only need 1.
+        rpl = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+            new ActivityResultCallback<Map<String, Boolean>>() {
+                @Override
+                public void onActivityResult(Map<String, Boolean> isGranted) {
+                    boolean granted = true;
+                    for (Map.Entry<String, Boolean> x : isGranted.entrySet()) {
+                        logthis(x.getKey() + " is " + x.getValue());
+                        if (!x.getValue()) granted = false;
+                    }
+                    if (granted) addContactDemo();
+                }
+            }
+        );
+        //textview, edittext and logger.
         logger = findViewById(R.id.logger);
-        //add check permission checking, for onResume code.
-        //add return check
+        name = findViewById(R.id.DisplayName);
+        mobileNumber = findViewById(R.id.MobileNumber);
+        homeNumber = findViewById(R.id.HomeNumber);
+        workNumber = findViewById(R.id.WorkNumber);
+        emailAddr = findViewById(R.id.emailID);
+        companyName = findViewById(R.id.company);
+        jobTitle2 = findViewById(R.id.JobTitle);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!allPermissionsGranted())
+                    rpl.launch(REQUIRED_PERMISSIONS);
+                else {
+                    logthis("All permissions have been granted already.");
+                    addContactDemo();
+                }
+            }
+        });
+     }
+
+    public void logthis(String msg) {
+        logger.append(msg + "\n");
+        Log.d(TAG, msg);
     }
 
     //ask for permissions when we start.
-    @Override
-    public void onResume() {
-        super.onResume();
-        CheckPerm();
-    }
-
-    public void CheckPerm() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            //I'm on not explaining why, just asking for permission.
-            Log.v(TAG, "asking for permissions");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CONTACTS},
-                MainActivity.REQUEST_PERM_ACCESS);
-
-        } else {
-            logger.append("\nContact Write Access: Granted\n");
-            addContactDemo();
-        }
-
-    }
-
-
-    //handle the response.
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-        switch (requestCode) {
-            case REQUEST_PERM_ACCESS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    logger.append("Contact Write Access: Granted");
-                    addContactDemo();
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    logger.append("Contact Write Access: Not Granted");
-                }
-                return;
+    private boolean allPermissionsGranted() {
+        for (String permission : REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        return true;
     }
-
 
     public void addContactDemo() {
-        String DisplayName = "Fred Flintstone";
-        String MobileNumber = "123456";
-        String HomeNumber = "1111";
-        String WorkNumber = "2222";
-        String emailID = "email@nomail.com";
-        String company = "Slate Rock company";
-        String jobTitle = "Foreman";
+        String DisplayName = name.getText().toString();
+        String MobileNumber = mobileNumber.getText().toString();
+        String HomeNumber = homeNumber.getText().toString();
+        String WorkNumber = workNumber.getText().toString();
+        String emailID = emailAddr.getText().toString();
+        String company = companyName.getText().toString();
+        String jobTitle = jobTitle2.getText().toString();
 
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
 
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             .build());
 
         //------------------------------------------------------ Names
-        if (DisplayName != null) {
+        if (!DisplayName.equals("")) {
             ops.add(ContentProviderOperation.newInsert(
                 ContactsContract.Data.CONTENT_URI)
                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Mobile Number
-        if (MobileNumber != null) {
+        if (!MobileNumber.equals("")) {
             ops.add(ContentProviderOperation.
                 newInsert(ContactsContract.Data.CONTENT_URI)
                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Home Numbers
-        if (HomeNumber != null) {
+        if (!HomeNumber.equals("")) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                 .withValue(ContactsContract.Data.MIMETYPE,
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Work Numbers
-        if (WorkNumber != null) {
+        if (!WorkNumber.equals("")) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                 .withValue(ContactsContract.Data.MIMETYPE,
@@ -152,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Email
-        if (emailID != null) {
+        if (!emailID.equals("")) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                 .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                 .withValue(ContactsContract.Data.MIMETYPE,
@@ -178,12 +181,11 @@ public class MainActivity extends AppCompatActivity {
         // Asking the Contact provider to create a new contact
         try {
             getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+            logthis("contact has been added.");
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getBaseContext(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            logthis( "Exception: " + e.getMessage());
         }
-
-
     }
 
 }
