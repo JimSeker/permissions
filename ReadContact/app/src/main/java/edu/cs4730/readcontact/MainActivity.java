@@ -26,7 +26,7 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
     public TextView logger;
-    public String TAG = "MainFragment";
+    public String TAG = "MainActivity";
     ActivityResultLauncher<String[]> rpl;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS"};
 
