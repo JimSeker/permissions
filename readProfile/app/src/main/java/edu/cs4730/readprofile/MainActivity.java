@@ -1,5 +1,6 @@
 package edu.cs4730.readprofile;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
     TextView logger;
     String TAG = "MainActivity";
     ActivityResultLauncher<String[]> rpl;
-    //private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_PROFILE", "android.permission.WRITE_PROFILE", "android.permission.READ_CONTACTS"};
+    //private final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_PROFILE, Manifest.permission.WRITE_PROFILE, Manifest.permission.READ_CONTACTS};
     //we only need to ask for read contacts permission.  The other are needed in the manifest.  this doesn't write the profile, so that is not needed.
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_CONTACTS};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

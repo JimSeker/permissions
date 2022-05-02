@@ -1,5 +1,6 @@
 package edu.cs4730.readcontact;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView logger;
     public String TAG = "MainActivity";
     ActivityResultLauncher<String[]> rpl;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_CONTACTS};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.provider.ContactsContract;
 
 /**
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView logger;
     EditText name, mobileNumber, homeNumber, workNumber, emailAddr, companyName, jobTitle2;
     ActivityResultLauncher<String[]> rpl;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_CONTACTS", "android.permission.WRITE_CONTACTS"};
+    private final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-     }
+    }
 
     public void logthis(String msg) {
         logger.append(msg + "\n");
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             logthis("contact has been added.");
         } catch (Exception e) {
             e.printStackTrace();
-            logthis( "Exception: " + e.getMessage());
+            logthis("Exception: " + e.getMessage());
         }
     }
 
