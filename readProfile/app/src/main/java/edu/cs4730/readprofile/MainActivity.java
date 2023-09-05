@@ -18,12 +18,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import edu.cs4730.readprofile.databinding.ActivityMainBinding;
+
 /**
  * This reads a profile and displays all the information to the screen.
  */
 
 public class MainActivity extends AppCompatActivity {
-    TextView logger;
+    ActivityMainBinding binding;
     String TAG = "MainActivity";
     ActivityResultLauncher<String[]> rpl;
     //private final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_PROFILE, Manifest.permission.WRITE_PROFILE, Manifest.permission.READ_CONTACTS};
@@ -33,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         rpl = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
             new ActivityResultCallback<Map<String, Boolean>>() {
                 @Override
@@ -59,12 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        logger = findViewById(R.id.logger);
-
     }
 
     public void logthis(String msg) {
-        logger.append(msg + "\n");
+        binding.logger.append(msg + "\n");
         Log.d(TAG, msg);
     }
 

@@ -19,99 +19,95 @@ import android.widget.Switch;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import edu.cs4730.callscreeningdemo.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     public static final String PREFS_NAME = "CallScreen";
-    SwitchMaterial noring, disallow, nonot, nolog, reject;
     CallScreenData myCallScreenData = new CallScreenData();
     ActivityResultLauncher<Intent> myActivityResultLauncher;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        noring = findViewById(R.id.noring);
-        disallow = findViewById(R.id.disallow);
-        nonot = findViewById(R.id.nonot);
-        nolog = findViewById(R.id.nolog);
-        reject = findViewById(R.id.reject);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        myActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        //Intent data = result.getData();
-                        Log.d(TAG, "We are the call screening app");
-                    } else {
-                        // Your app is not the call screening app
-                        Log.wtf(TAG, "We are NOT the call screening app");
-                    }
+        myActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    //Intent data = result.getData();
+                    Log.d(TAG, "We are the call screening app");
+                } else {
+                    // Your app is not the call screening app
+                    Log.wtf(TAG, "We are NOT the call screening app");
                 }
-            });
+            }
+        });
 
 
         //set everything.
         loadTitlePref(getApplicationContext(), myCallScreenData);
-        noring.setChecked(myCallScreenData.noring);
-        disallow.setChecked(myCallScreenData.disallow);
-        nonot.setChecked(myCallScreenData.nonot);
-        nolog.setChecked(myCallScreenData.nolog);
-        reject.setChecked(myCallScreenData.reject);
+        binding.noring.setChecked(myCallScreenData.noring);
+        binding.disallow.setChecked(myCallScreenData.disallow);
+        binding.nonot.setChecked(myCallScreenData.nonot);
+        binding.nolog.setChecked(myCallScreenData.nolog);
+        binding.reject.setChecked(myCallScreenData.reject);
 
-        noring.setOnClickListener(new View.OnClickListener() {
+        binding.noring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myCallScreenData.noring = noring.isChecked();
+                myCallScreenData.noring = binding.noring.isChecked();
                 saveTitlePref(getApplicationContext(), myCallScreenData);
             }
         });
-        disallow.setOnClickListener(new View.OnClickListener() {
+        binding.disallow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!disallow.isChecked()) { //turned off
-                    reject.setChecked(false);
-                    nonot.setChecked(false);
-                    nolog.setChecked(false);
+                if (!binding.disallow.isChecked()) { //turned off
+                    binding.reject.setChecked(false);
+                    binding.nonot.setChecked(false);
+                    binding.nolog.setChecked(false);
                 }
-                myCallScreenData.disallow = disallow.isChecked();
-                myCallScreenData.reject = reject.isChecked();
-                myCallScreenData.nonot = nonot.isChecked();
-                myCallScreenData.nolog = nolog.isChecked();
+                myCallScreenData.disallow = binding.disallow.isChecked();
+                myCallScreenData.reject = binding.reject.isChecked();
+                myCallScreenData.nonot = binding.nonot.isChecked();
+                myCallScreenData.nolog = binding.nolog.isChecked();
                 saveTitlePref(getApplicationContext(), myCallScreenData);
             }
         });
-        reject.setOnClickListener(new View.OnClickListener() {
+        binding.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (reject.isChecked()) {
-                    disallow.setChecked(true);
+                if (binding.reject.isChecked()) {
+                    binding.disallow.setChecked(true);
                 }
-                myCallScreenData.disallow = disallow.isChecked();
-                myCallScreenData.reject = reject.isChecked();
+                myCallScreenData.disallow = binding.disallow.isChecked();
+                myCallScreenData.reject = binding.reject.isChecked();
                 saveTitlePref(getApplicationContext(), myCallScreenData);
             }
         });
-        nonot.setOnClickListener(new View.OnClickListener() {
+        binding.nonot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nonot.isChecked()) {
-                    disallow.setChecked(true);
+                if (binding.nonot.isChecked()) {
+                    binding.disallow.setChecked(true);
                 }
-                myCallScreenData.disallow = disallow.isChecked();
-                myCallScreenData.nonot = nonot.isChecked();
+                myCallScreenData.disallow = binding.disallow.isChecked();
+                myCallScreenData.nonot = binding.nonot.isChecked();
                 saveTitlePref(getApplicationContext(), myCallScreenData);
             }
         });
-        nolog.setOnClickListener(new View.OnClickListener() {
+        binding.nolog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nolog.isChecked()) {
-                    disallow.setChecked(true);
+                if (binding.nolog.isChecked()) {
+                    binding.disallow.setChecked(true);
                 }
-                myCallScreenData.disallow = disallow.isChecked();
-                myCallScreenData.nolog = nolog.isChecked();
+                myCallScreenData.disallow = binding.disallow.isChecked();
+                myCallScreenData.nolog = binding.nolog.isChecked();
                 saveTitlePref(getApplicationContext(), myCallScreenData);
             }
         });
@@ -127,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Write the prefix to the SharedPreferences object for this widget
     static void saveTitlePref(Context context, CallScreenData data) {
-        SharedPreferences.Editor prefs = context.getSharedPreferences(
-            PREFS_NAME, 0).edit();
+        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putBoolean("noring", data.noring);
         prefs.putBoolean("disallow", data.disallow);
         prefs.putBoolean("reject", data.reject);
