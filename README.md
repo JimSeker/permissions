@@ -4,7 +4,9 @@ Android Permission Examples
 
 `legacy/`  are projects that are no longer updated.<BR>
 
-`ReadContact` a demo of how to read the contacts on the device.
+`ReadContact` (java) a demo of how to read the contacts on the device.
+
+`ReadContact_kt` (kotlin) a demo of how to read the contacts on the device.
 
 `WriteContact` a demo of how to write a contact to the device (and Google)
 
