@@ -8,7 +8,9 @@ Android Permission Examples
 
 `ReadContact_kt` (kotlin) a demo of how to read the contacts on the device.
 
-`WriteContact` a demo of how to write a contact to the device (and Google)
+`WriteContact` (java) a demo of how to write a contact to the device (and Google)
+
+`WriteContact_kt` (kotlin) a demo of how to write a contact to the device (and Google)
 
 `readProfile` a demo of how to read the profile information on the device (api 14+)
 
