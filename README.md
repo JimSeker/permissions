@@ -12,7 +12,9 @@ Android Permission Examples
 
 `WriteContact_kt` (kotlin) a demo of how to write a contact to the device (and Google)
 
-`readProfile` a demo of how to read the profile information on the device (api 14+)
+`readProfile` (java) a demo of how to read the profile information on the device (api 14+)
+
+`readProfile_kt` (kotlin) a demo of how to read the profile information on the device (api 14+)
 
 `setwallpaper` show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
