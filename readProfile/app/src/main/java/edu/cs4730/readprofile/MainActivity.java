@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         );
 
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+        binding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!allPermissionsGranted())
