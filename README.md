@@ -16,10 +16,13 @@ Android Permission Examples
 
 `readProfile_kt` (kotlin) a demo of how to read the profile information on the device (api 14+)
 
-`setwallpaper` show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
+`setwallpaper` (java) show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
-`CallScreeningDemo`: A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  the outbound call part still looks to be ignored.
+`setwallpaper_kt` (java) show how to set a wall paper on the device.  Includes a default picture to set as wall paper.
 
+`CallScreeningDemo` (java)A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  the outbound call part still looks to be ignored.
+
+`CallScreeningDemo_kt` (kotlin) A very basic call screening app.  It all or nothing on phone calls, but demo's how it works.  the outbound call part still looks to be ignored.
 ---
 
 These are example code for University of Wyoming, Cosc 4730 Mobile Programming course and cosc 4735 Advance Mobile Programing course. 

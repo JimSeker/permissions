@@ -5,7 +5,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.Activity;
 import android.app.role.RoleManager;
@@ -15,9 +14,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import edu.cs4730.callscreeningdemo.databinding.ActivityMainBinding;
 
