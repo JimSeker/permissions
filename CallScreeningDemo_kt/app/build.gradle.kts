@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "edu.cs4730.callscreeningdemo_kt"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "edu.cs4730.callscreeningdemo_kt"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

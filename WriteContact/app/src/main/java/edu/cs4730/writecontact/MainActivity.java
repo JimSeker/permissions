@@ -7,6 +7,9 @@ import android.Manifest;
 import android.content.ContentProviderOperation;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -14,11 +17,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.provider.ContactsContract;
 
 import edu.cs4730.writecontact.databinding.ActivityMainBinding;
 
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 .build());
 
         //------------------------------------------------------ Names
-        if (!DisplayName.equals("")) {
+        if (!DisplayName.isEmpty()) {
             ops.add(ContentProviderOperation.newInsert(
                             ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Mobile Number
-        if (!MobileNumber.equals("")) {
+        if (!MobileNumber.isEmpty()) {
             ops.add(ContentProviderOperation.
                     newInsert(ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Home Numbers
-        if (!HomeNumber.equals("")) {
+        if (!HomeNumber.isEmpty()) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                     .withValue(ContactsContract.Data.MIMETYPE,
@@ -135,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Work Numbers
-        if (!WorkNumber.equals("")) {
+        if (!WorkNumber.isEmpty()) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                     .withValue(ContactsContract.Data.MIMETYPE,
@@ -147,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Email
-        if (!emailID.equals("")) {
+        if (!emailID.isEmpty()) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                     .withValue(ContactsContract.Data.MIMETYPE,
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //------------------------------------------------------ Organization
-        if (!company.equals("") && !jobTitle.equals("")) {
+        if (!company.isEmpty() && !jobTitle.isEmpty()) {
             ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                     .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
                     .withValue(ContactsContract.Data.MIMETYPE,
