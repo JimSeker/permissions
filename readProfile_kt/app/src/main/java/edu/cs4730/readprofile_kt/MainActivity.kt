@@ -7,10 +7,13 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import edu.cs4730.readprofile_kt.databinding.ActivityMainBinding
 
 
@@ -29,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.getRoot())
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v: View, insets: WindowInsetsCompat ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
         rpl = registerForActivityResult<Array<String>, Map<String, Boolean>>(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { isGranted ->
@@ -56,8 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
-                    this,
-                    permission
+                    this, permission
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 return false
@@ -72,9 +79,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("Range")
     private fun getProfile() {
-        val c =
-            contentResolver.query(ContactsContract.Profile.CONTENT_URI, null, null, null, null)
-                ?: return
+        val c = contentResolver.query(ContactsContract.Profile.CONTENT_URI, null, null, null, null)
+            ?: return
         val count = c.count
         val columnNames = c.columnNames
         c.moveToFirst() //make sure the cursor is at the beginning, because it could be at the end of the list already.

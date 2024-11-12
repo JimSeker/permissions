@@ -3,7 +3,10 @@ package edu.cs4730.setwallpaper_kt
 import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import edu.cs4730.setwallpaper_kt.databinding.ActivityMainBinding
 import java.io.IOException
 
@@ -18,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.getRoot())
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v: View, insets: WindowInsetsCompat ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
+
         binding.preview.setImageResource(R.raw.ifixedit)
         binding.set.setOnClickListener {
             //get the wall paper manager and set a new wall paper.
