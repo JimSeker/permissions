@@ -25,7 +25,7 @@ public class myCallScreeningService extends CallScreeningService {
 
             //get my discisions
             MainActivity.loadTitlePref(getApplicationContext(), myCallScreenData);
-            /**
+            /*
              * Now we build a response to the call, ie ignore it or that sort of thing.
              *  As of 29 we have the following to set true/false
              *    Not documented in api, so I'm guessing the meaning, based on the name.

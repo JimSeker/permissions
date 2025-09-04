@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.cs4730.callscreeningdemo_kt.databinding.ActivityMainBinding
+import androidx.core.content.edit
 
 
 class MainActivity : AppCompatActivity() {
@@ -104,13 +105,13 @@ class MainActivity : AppCompatActivity() {
         // Write the prefix to the SharedPreferences object for this widget
         @JvmStatic
         fun saveTitlePref(context: Context, data: CallScreenData) {
-            val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-            prefs.putBoolean("noring", data.noring)
-            prefs.putBoolean("disallow", data.disallow)
-            prefs.putBoolean("reject", data.reject)
-            prefs.putBoolean("nolog", data.nolog)
-            prefs.putBoolean("nonot", data.nonot)
-            prefs.commit()
+            context.getSharedPreferences(PREFS_NAME, 0).edit(commit = true) {
+                putBoolean("noring", data.noring)
+                putBoolean("disallow", data.disallow)
+                putBoolean("reject", data.reject)
+                putBoolean("nolog", data.nolog)
+                putBoolean("nonot", data.nonot)
+            }
         }
 
         // Read the prefix from the SharedPreferences object for this widget.
